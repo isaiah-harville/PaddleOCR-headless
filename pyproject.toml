@@ -64,7 +64,6 @@ dependencies = [
     "tqdm",
     "numpy",
     "rapidfuzz",
-    "opencv-python-headless",
     "opencv-contrib-python-headless",
     "cython",
     "Pillow",
