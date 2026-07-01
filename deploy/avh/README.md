@@ -43,7 +43,7 @@ Case 3: If the demo is not run in the ci_cpu Docker container, then you will nee
     - These can be installed by running the following from the current directory:
 
     ```bash
-    pip install -r ./requirements.txt
+    uv sync
     ```
 
 In case2 and case3:

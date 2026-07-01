@@ -77,7 +77,7 @@ jobs:
             python -c "import paddle; paddle.version.show()"
             python -m pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
             python -m pip install pytest
-            if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+            if [ -f uv.lock ]; then uv sync; fi
             PADDLEX_SERIES=$(grep -oE "paddlex\[[^]]+\]>=[0-9]+\.[0-9]+" pyproject.toml | head -1 | grep -oE "[0-9]+\.[0-9]+")
             if [ -z "$PADDLEX_SERIES" ]; then
               echo "Failed to determine PaddleX version requirement from pyproject.toml" >&2

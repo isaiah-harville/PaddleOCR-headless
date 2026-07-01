@@ -44,7 +44,7 @@ export PATH=/opt/arm/gcc-arm-none-eabi/bin:$PATH
 
 # Install python libraries
 echo -e "\e[36mInstall python libraries\e[0m"
-sudo pip install -r ./requirements.txt
+sudo uv sync
 
 # Parse arguments
 while (( $# )); do
@@ -101,7 +101,7 @@ while (( $# )); do
                 exit 1
             fi
             ;;
-            
+
         --enable_FVP)
             if [ $# -gt 1 ] && [ "$2" == "1" -o "$2" == "0" ];
             then

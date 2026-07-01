@@ -36,7 +36,7 @@
   - [CMSIS](https://github.com/ARM-software/CMSIS_5)
 - python 依赖
   ```bash
-  pip install -r ./requirements.txt
+  uv sync
   ```
 - TVM
   - 从源码安装([Install from Source](https://tvm.apache.org/docs/install/from_source.html))

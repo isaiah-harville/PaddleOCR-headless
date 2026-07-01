@@ -72,8 +72,13 @@ git clone https://gitee.com/paddlepaddle/PaddleOCR
 # Please prioritize the recommended method.
 ```
 
-Run the following command to install the remaining training dependencies:
+Run the following command to install the training dependencies (they are declared
+in `pyproject.toml`, so installing the project from the checkout pulls them in):
 
 ```bash
-python -m pip install -r requirements.txt
+uv sync
+```
+or
+```bash
+python -m pip install -e .
 ```

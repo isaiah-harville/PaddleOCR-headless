@@ -69,8 +69,12 @@ git clone https://gitee.com/paddlepaddle/PaddleOCR
 # 注：码云托管代码可能无法实时同步本 GitHub 项目更新，存在3~5天延时，请优先使用推荐方式。
 ```
 
-执行如下命令安装其余训练依赖：
+执行如下命令安装训练依赖（这些依赖已声明在 `pyproject.toml` 中，从源码目录安装本项目即可一并安装）：
 
 ```bash
-python -m pip install -r requirements.txt
+uv sync
+```
+or
+```bash
+python -m pip install -e .
 ```

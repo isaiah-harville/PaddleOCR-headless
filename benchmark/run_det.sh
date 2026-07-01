@@ -3,7 +3,7 @@
 # 执行目录: ./PaddleOCR
 # 1 安装该模型需要的依赖 (如需开启优化策略请注明)
 log_path=${LOG_PATH_INDEX_DIR:-$(pwd)}
-python -m pip install -r requirements.txt
+uv sync
 # 2 拷贝该模型需要数据、预训练模型
 wget -P ./train_data/  https://paddleocr.bj.bcebos.com/dygraph_v2.0/test/icdar2015.tar && cd train_data  && tar xf icdar2015.tar && cd ../
 wget -P ./pretrain_models/ https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/ResNet50_vd_pretrained.pdparams

@@ -14,7 +14,7 @@ maintainers = [
     {name = "PaddlePaddle", email = "paddleocr@baidu.com"},
 ]
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11,<4"
 keywords = [
     "ocr",
     "textdetection",
@@ -47,11 +47,31 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "paddlex[ocr-core]>=3.7.0,<3.8.0",
+    # Headless OpenCV extra, served from the fork below (see [tool.uv.sources]).
+    # No version specifier: the git source builds without a tag (setuptools_scm
+    # falls back to 0.0.0), so a >= constraint would not be satisfiable.
+    "paddlex[ocr-core-headless]",
     "PyYAML>=6",
     "requests",
     "aiohttp>=3.8.0",
     "typing-extensions>=4.12",
+    # OCR / training-script dependencies (formerly requirements.txt).
+    # OpenCV uses the headless build (no GUI / system libGL dependencies).
+    "shapely",
+    "scikit-image",
+    "pyclipper",
+    "lmdb",
+    "tqdm",
+    "numpy",
+    "rapidfuzz",
+    "opencv-python-headless",
+    "opencv-contrib-python-headless",
+    "cython",
+    "Pillow",
+    "albumentations",
+    # to be compatible with albumentations
+    "albucore",
+    "packaging",
 ]
 
 [project.urls]
@@ -64,11 +84,19 @@ issues = "https://github.com/PaddlePaddle/PaddleOCR/issues"
 paddleocr = "paddleocr.__main__:console_entry"
 
 [project.optional-dependencies]
-doc-parser = ["paddlex[ocr,genai-client]>=3.7.0,<3.8.0"]
-ie = ["paddlex[ie]>=3.7.0,<3.8.0"]
-trans = ["paddlex[trans]>=3.7.0,<3.8.0"]
+doc-parser = ["paddlex[ocr-headless,genai-client]"]
+ie = ["paddlex[ie-headless]"]
+trans = ["paddlex[trans-headless]"]
 doc2md = ["python-docx>=0.8.11", "python-pptx>=0.6.21", "openpyxl>=3.0.0", "pylatexenc>=2.10,<3"]
-all = ["paddlex[ocr,genai-client,ie,trans]>=3.7.0,<3.8.0", "python-docx>=0.8.11", "python-pptx>=0.6.21", "openpyxl>=3.0.0"]
+all = ["paddlex[ocr-headless,genai-client,ie-headless,trans-headless]", "python-docx>=0.8.11", "python-pptx>=0.6.21", "openpyxl>=3.0.0"]
+
+[tool.uv.sources]
+# Use the fork that provides the `*-headless` extras (pulls the headless OpenCV
+# build instead of the GUI `opencv-contrib-python`). Upstream PR:
+# https://github.com/PaddlePaddle/PaddleX/pull/5169
+# Once that lands in a released paddlex, this source can be removed and the
+# extras pointed back at the published package.
+paddlex = { git = "https://github.com/isaiah-harville/PaddleX.git", branch = "headless-opencv-extras" }
 
 [tool.setuptools.packages.find]
 where = ["."]
